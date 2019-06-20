@@ -12,6 +12,7 @@ myUsername = input("Username: ")
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect((IP, PORT))
 clientSocket.setblocking(False) # so recieved functionality won't be blocking
+
 username = myUsername.encode("utf-8")
 usernameHeader = f"{len(username):<{HEADER_LENGTH}}".encode("utf-8")
 clientSocket.send(usernameHeader + username)

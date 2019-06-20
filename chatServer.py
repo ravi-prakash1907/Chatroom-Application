@@ -1,19 +1,18 @@
 import socket
-import select       # to manage many connection i.e. diferent Operation
+import select       # to manage many connection i.e. on diferent Operating Systems
 
 HEADER_LENGTH = 10
 IP = "127.0.0.1"
 PORT = 1234
 
+# socket setup
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # cleare why we used setsockopt()
 
 serverSocket.bind((IP, PORT))
 serverSocket.listen()
 
-
-
-
+###################
 
 def receiveMsg(clientSocket):
     try:
@@ -28,13 +27,10 @@ def receiveMsg(clientSocket):
         return False
 
 
-
-
-
 # actual server stuff
 socketList = [serverSocket]   #list of clients as soon as they connection
 
-clients = {}
+clients = {}   # dictonary --->  Key = clientSocket, Value = userData
 
 while True:
     readSockets, _, exceptionSocket = select.select(socketList, [], socketList)
@@ -49,7 +45,7 @@ while True:
             socketList.append(clientSocket)
             clients[clientSocket] = user
 
-            print(f"Accepted new connection from {clientAddr[0]}:{clientAddr[1]} username:{user['data'].decode('utf-8')}")
+            print(f"Accepted new connection from {clientAddr[0]}:{clientAddr[1]} username:{user['data'].decode('utf-8')}") # using dictionary
 
         else:
             message = receiveMsg(notifiedSoc)
