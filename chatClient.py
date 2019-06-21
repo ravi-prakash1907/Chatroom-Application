@@ -7,7 +7,9 @@ import errno
 import sys
 
 HEADER_LENGTH = 10
-IP = "127.0.0.1"
+
+IP = input("Enter the Server\'s IP-Address (where to connect): ")
+#IP = "127.0.0.1"
 PORT = 4234
 
 myUsername = input("Username: ")
