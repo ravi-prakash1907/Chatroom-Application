@@ -3,7 +3,7 @@ import select       # to manage many connection i.e. on diferent Operating Syste
 
 HEADER_LENGTH = 10
 IP = "127.0.0.1"
-PORT = 1234
+PORT = 4234
 
 # socket setup
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

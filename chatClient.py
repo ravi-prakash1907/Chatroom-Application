@@ -1,3 +1,6 @@
+from EnigmaEncryption import encoder
+from EnigmaEncryption import decoder
+
 import socket
 import select
 import errno
@@ -5,7 +8,7 @@ import sys
 
 HEADER_LENGTH = 10
 IP = "127.0.0.1"
-PORT = 1234
+PORT = 4234
 
 myUsername = input("Username: ")
 
@@ -22,6 +25,7 @@ while True:
     #message = ""                   # ENABLE to run this client just as server ie.e can only read
 
     if message:
+        message = encoder.mainFun(message) #######################################
         message = message.encode("UTF-8")
         messageHeader = f"{len(message):<{HEADER_LENGTH}}".encode("utf-8")
         clientSocket.send(messageHeader + message)
@@ -39,6 +43,7 @@ while True:
             messageHeader = clientSocket.recv(HEADER_LENGTH)
             messageLen = int(messageHeader.decode("utf-8").strip())
             message = clientSocket.recv(messageLen).decode("utf-8")
+            message = decoder.mainFun(message)  ####################################
 
             print(f"{username} > {message}")
 
