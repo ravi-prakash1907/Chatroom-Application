@@ -3,8 +3,8 @@ import select       # to manage many connection i.e. on diferent Operating Syste
 
 HEADER_LENGTH = 10
 
-#IP = input("Enter the Server\'s IP-Address: ")
-IP = "127.0.0.1"
+IP = input("Enter the Server\'s IP-Address: ")
+#IP = "127.0.0.1"
 PORT = 1234
 
 # socket setup
@@ -64,7 +64,6 @@ while True:
             for clientSocket in clients:
                 if clientSocket != notifiedSoc:
                     clientSocket.send(user['header'] + user['data'] + message['header'] + message['data'])
-                    print(f"Sent message to {user['data'].decode('utf-8')}: {message['data'].decode('utf-8')}")
 
     for notifiedSoc in exceptionSocket:
         socketList.remove(notifiedSoc)
