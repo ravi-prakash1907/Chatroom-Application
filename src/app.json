@@ -1,0 +1,20 @@
+{
+    "name": "Chatroom | EncryptIT",
+    "description": "A chatroom app enhnaced with end-to-end Encryption",
+    "image": "heroku/python",
+    "repository": "https://github.com/ravi-prakash1907/Chatroom-Application/tree/Chatroom-Project",
+    "keywords": [
+        "python",
+        "kivy"
+    ],
+    "addons": [
+        ""
+    ],
+    "environments": {
+        "test": {
+            "scripts": {
+                "test": "server.py test"
+            }
+        }
+    }
+}
