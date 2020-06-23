@@ -1,5 +1,5 @@
-from EncryptIT import encoder
-from EncryptIT import decoder
+from EnigmaEncryption import encoder
+from EnigmaEncryption import decoder
 from threading import Thread #   new
 
 import socket

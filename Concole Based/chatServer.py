@@ -1,15 +1,11 @@
 import socket
 import select       # to manage many connection i.e. on diferent Operating Systems
-import os
 
 HEADER_LENGTH = 10
 
-#IP = input("Enter the Server\'s IP-Address: ")
-IP = "0.0.0.0"  # while we deploy it on heroku
-
-# Hard coding the port
-# PORT = 1234
-PORT = int(os.environ["PORT"])
+IP = input("Enter the Server\'s IP-Address: ")
+#IP = "127.0.0.1"
+PORT = 4234
 
 # socket setup
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
