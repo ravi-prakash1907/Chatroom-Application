@@ -1,4 +1,6 @@
-# Chatroom-Application
+# Chat-Secure  
+![assets/banner.jpg](./assets/banner.jpg)  
+
 A basic level chatroom application developed in Python  to handle Multiple clients with a single server
 
 ## About this application
