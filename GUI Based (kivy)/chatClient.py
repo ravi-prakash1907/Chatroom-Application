@@ -44,7 +44,7 @@ def listen(incoming_message_callback, error_callback):
                 #receive things
                 usernameHeader = clientSocket.recv(HEADER_LENGTH)
                 if not len(usernameHeader):
-                    error_callback("Connection closed by server")
+                    error_callback("Server is down!!!")
                     #sys.exit()
                 usernameLen = int(usernameHeader.decode("utf-8").strip())
                 username = clientSocket.recv(usernameLen).decode("utf-8")

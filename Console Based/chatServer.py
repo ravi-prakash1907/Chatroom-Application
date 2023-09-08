@@ -35,54 +35,42 @@ socketList = [serverSocket]   #list of clients as soon as they connection
 clients = {}   # dictonary --->  Key = clientSocket, Value = userData
 
 while True:
-    readSockets, _, exceptionSocket = select.select(socketList, [], socketList)
-    for notifiedSoc in readSockets:
-        if notifiedSoc == serverSocket:     # someone has requested to connect
-            clientSocket, clientAddr = serverSocket.accept()
+    try:
+        readSockets, _, exceptionSocket = select.select(socketList, [], socketList)
+        for notifiedSoc in readSockets:
+            if notifiedSoc == serverSocket:     # someone has requested to connect
+                clientSocket, clientAddr = serverSocket.accept()
 
-            user = receiveMsg(clientSocket)
-            if user is False:  # someone Disconnected
-                continue
+                user = receiveMsg(clientSocket)
+                if user is False:  # someone Disconnected
+                    continue
 
-            socketList.append(clientSocket)
-            clients[clientSocket] = user
+                socketList.append(clientSocket)
+                clients[clientSocket] = user
 
-            print(f"Accepted new connection from {clientAddr[0]}:{clientAddr[1]} username:{user['data'].decode('utf-8')}") # using dictionary
+                print(f"Accepted new connection from {clientAddr[0]}:{clientAddr[1]} username:{user['data'].decode('utf-8')}") # using dictionary
 
-        else:
-            message = receiveMsg(notifiedSoc)
+            else:
+                message = receiveMsg(notifiedSoc)
 
-            if message is False:
-                print(f"Closed conn. from {clients[notifiedSoc]['data'].decode('utf-8')}")
-                socketList.remove(notifiedSoc)
-                del clients[notifiedSoc]
-                continue
+                if message is False:
+                    print(f"Closed conn. from {clients[notifiedSoc]['data'].decode('utf-8')}")
+                    socketList.remove(notifiedSoc)
+                    del clients[notifiedSoc]
+                    continue
 
-            user = clients[notifiedSoc]
-            print(f"Recieved message from {user['data'].decode('utf-8')}: {message['data'].decode('utf-8')}")
+                user = clients[notifiedSoc]
+                print(f"Recieved message from {user['data'].decode('utf-8')}: {message['data'].decode('utf-8')}")
 
-            for clientSocket in clients:
-                if clientSocket != notifiedSoc:
-                    clientSocket.send(user['header'] + user['data'] + message['header'] + message['data'])
+                for clientSocket in clients:
+                    if clientSocket != notifiedSoc:
+                        clientSocket.send(user['header'] + user['data'] + message['header'] + message['data'])
 
-    for notifiedSoc in exceptionSocket:
-        socketList.remove(notifiedSoc)
-        del clients[notifiedSoc]
+        for notifiedSoc in exceptionSocket:
+            socketList.remove(notifiedSoc)
+            del clients[notifiedSoc]
+    
+    except:
+        print(\nExiting...)
+        break
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#

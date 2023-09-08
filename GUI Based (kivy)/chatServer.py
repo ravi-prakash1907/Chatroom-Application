@@ -47,7 +47,7 @@ while True:
             socketList.append(clientSocket)
             clients[clientSocket] = user
 
-            print(f"Accepted new connection from {clientAddr[0]}:{clientAddr[1]} username:{user['data'].decode('utf-8')}") # using dictionary
+            print(f"\nAccepted new connection from {clientAddr[0]}:{clientAddr[1]} username:{user['data'].decode('utf-8')}\n") # using dictionary
 
         else:
             message = receiveMsg(notifiedSoc)
